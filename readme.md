@@ -1,5 +1,5 @@
 ## jkrouter
-
+###nodejs 以js文件名为路径分配路由
 File/Folder as `path`, another router middleware for nodejs.
 
 ### Install
@@ -40,8 +40,11 @@ router(app, options)
 
 ```
 var router = require('express').Router();
-var indexModel = require('../models/indexModel');
-router.get('/index(.html)?', indexModel.banner);
+router.get('/index(.html)?', function(req, res, next) {
+  res.send('这是一个测试');
+});
+module.exports = router;
+
 ```
 
 **links.js**
@@ -49,20 +52,28 @@ router.get('/index(.html)?', indexModel.banner);
 ```
 var router = require('express').Router();
 router.get('/', function(req, res, next) {
-  res.send('banner');
+  res.send('这是一个link测试');
 });
+
 module.exports = router;
+
 ```
 
 **app.js**
 
 ```
-var express = require('express'),
-var router = require('jkrouter');
-var roters = path.join(__dirname, 'routes');
+var express = require('express');
+var path = require('path');//路径解析
 var app = express();
-roters(app,roters);
-app.listen(3000);
+var jkrouter = require('jkrouter');
+var routers = path.join(__dirname, 'routers');
+console.log(routers)
+jkrouter(app,routers);
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('Example app listening at http://%s:%s', host, port);
+});
 
 
 
