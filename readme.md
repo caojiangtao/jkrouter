@@ -1,10 +1,10 @@
 ## jkrouter
-###nodejs 以js文件名为路径分配路由
+###  nodejs 以js文件名为路径分配路由
 File/Folder as `path`, another router middleware for nodejs.
 
 ### Install
 
-    npm i jkrouter --save
+    npm Install jkrouter --save
 
 ### Usage
 
